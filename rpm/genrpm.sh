@@ -38,14 +38,15 @@ do
     esac
 done
 
-: ${version:=2.5.6}
+: ${version:=`date +%Y%m%d`}
+: ${branch:=master}
 : ${format:=tar.gz}
 
 name="shadowsocks-libev"
 spec_name="shadowsocks-libev.spec"
 
 pushd `git rev-parse --show-toplevel`
-git archive "v${version}" --format="${format}" --prefix="${name}-${version}/" -o rpm/SOURCES/"${name}-${version}.${format}"
+git archive "${branch}" --format="${format}" --prefix="${name}-${version}/" -o rpm/SOURCES/"${name}-${version}.${format}"
 pushd rpm
 
 sed -e "s/^\(Version:	\).*$/\1${version}/" \
